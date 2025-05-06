@@ -1,16 +1,13 @@
 package handlers
 
 import (
-	"encoding/json"
-	"net/http"
+	"github.com/gofiber/fiber/v2"
 )
 
-func GetContractInfo(w http.ResponseWriter, r *http.Request) {
-	info := map[string]string{
-		"scriptAddress": "addr_test1xyz...abc", // replace with real one later
-		"policyId":      "123abc...",           // fake for now
+func GetContractInfo(c *fiber.Ctx) error {
+	contract := fiber.Map{
+		"policyId":  "abc123xyz456",
+		"scriptUrl": "https://ipfs.io/ipfs/Qm...",
 	}
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(info)
+	return c.JSON(contract)
 }
